@@ -4,14 +4,22 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  TabOne: undefined;
+  SelectScreen: undefined;
   TabTwo: undefined;
 };
 
-export type TabOneParamList = {
-  TabOneScreen: undefined;
+export type SelectScreenParamList = {
+  SelectScreen: undefined;
+  CharacterScreen: SelectableItemProps;
 };
 
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+
+export type SelectableItemProps = {
+  name: string;
+  type?: string;
+  uri?: string;
+  searchTerm?: string;
+}
