@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import PrintProvider from './context/PrintProvider';
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
@@ -15,8 +16,10 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
+        <PrintProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </PrintProvider>
       </SafeAreaProvider>
     );
   }

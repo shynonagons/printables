@@ -1,5 +1,23 @@
 export default [
   {
+    name: 'Pokemon',
+    uri: 'http://getdrawings.com/cliparts/pokeball-clipart-10.jpg',
+  },
+  {
+    name: 'Dog Man',
+    uri: 'https://webstockreview.net/images/clipart-dog-man-1.jpg',
+  },
+  {
+    name: 'Cat Kid',
+    searchTerm: 'cat kid dog man',
+    uri: 'https://i.pinimg.com/736x/93/30/db/9330db82a94e518165239279d25c4d30.jpg',
+  },
+  {
+    name: 'Petey',
+    searchTerm: 'petey dog man',
+    uri: 'https://vignette.wikia.nocookie.net/dog-man/images/5/52/09f2f1b0a04eb6522ff89b253a36617a.png/revision/latest?cb=20200805161221',
+  },
+  {
     name: 'Avengers',
     uri: 'https://maxcdn.icons8.com/Share/icon/Cinema/avengers1600.png',
   },
@@ -223,5 +241,67 @@ export default [
   {
     name: 'Baby Shark',
     uri: 'https://static.thenounproject.com/png/1807212-200.png',
+  },
+  {
+    name: 'Star',
+    uri: 'http://cdn.onlinewebfonts.com/svg/img_572665.png',
+  },
+  {
+    name: 'Monkey',
+    uri: 'https://image.flaticon.com/icons/svg/194/194978.svg',
+  },
+  {
+    name: 'Flag',
+    uri: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/512/flag-icon.png',
+  },
+  {
+    name: 'Llama',
+    uri: 'https://image.flaticon.com/icons/png/512/1864/1864556.png',
+  },
+  {
+    name: 'Elmo',
+    uri: 'https://cdn.sesamestreet.org/sites/default/files/Icon_Muppet_Elmo_0.png',
+  },
+  {
+    name: 'Monsters Inc',
+    uri: 'https://cdn.dribbble.com/users/194846/screenshots/1526864/mikewazdribbble.png',
+  },
+  {
+    name: 'Harry Potter',
+    uri: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b555cca6-60b6-412c-8fbd-dc9aaf3c2740/dbfr8a2-2fe28741-69fe-48af-b0a9-fe7fe86c0fac.png/v1/fill/w_400,h_401,q_75,strp/harry_potter_icon_by_rickyrgoetz-dbfr8a2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9iNTU1Y2NhNi02MGI2LTQxMmMtOGZiZC1kYzlhYWYzYzI3NDAvZGJmcjhhMi0yZmUyODc0MS02OWZlLTQ4YWYtYjBhOS1mZTdmZTg2YzBmYWMucG5nIiwid2lkdGgiOiI8PTQwMCIsImhlaWdodCI6Ijw9NDAxIn1dXX0.jKQdc78d31nkQIqQPmt6ANmSQBcXioxkV8niJGvF_sM',
+  },
+  {
+    name: 'Lemur',
+    uri: 'https://image.flaticon.com/icons/png/512/235/235389.png',
+  },
+  {
+    name: 'Bluey',
+    uri: 'https://superawesomevectors.com/wp-content/uploads/2020/08/bluey-free-vector.jpg',
+  },
+  {
+    name: 'Pikachu',
+    uri: 'https://image.flaticon.com/icons/png/512/528/528098.png',
+  },
+  {
+    name: 'Sonic',
+    searchTerm: 'sonic the hedgehog',
+    uri: 'https://www.pngkit.com/png/detail/950-9501960_sonic-head-icon-sonic-the-hedgehog-icon.png',
+  },
+  {
+    name: 'Koopa Troopa',
+    uri: 'https://www.mariowiki.com/images/3/3d/KoopaTroopa_iconart.png',
+  },
+  {
+    name: 'Donkey Kong',
+    uri: 'https://images.vectorhq.com/images/previews/f6c/donkey-kong-barrel-psd-430437.png',
+  },
+  {
+    name: 'Baby Yoda',
+    uri: 'https://cdn.dribbble.com/users/1025917/screenshots/9174418/baby-yoda-pixelwolfie-dribbble.jpg',
+  },
+  {
+    name: 'Puppy',
+    searchTerm: 'puppy coloring pages',
+    uri: 'http://icons.iconarchive.com/icons/google/noto-emoji-animals-nature/1024/22214-dog-face-icon.png',
   },
 ].map((i, index) => ({ ...i, key: index }));

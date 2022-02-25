@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { Alert } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Print from 'expo-print';
 
-const PRINT_RATE_LIMIT = 6;
+export const PRINT_RATE_LIMIT = 3;
 
-export default function usePrint() {
+const PrintContext = React.createContext({});
+
+const PrintProvider = (props): React.ReactElement => {
+  const { children } = props;
+
   const [printCount, setPrintCount] = React.useState(0);
-
   const getStoredPrintCount = async () => {
     const expiry = (await AsyncStorage.getItem(`expiry`)) || 0;
     if (new Date().valueOf() > expiry) {
@@ -18,7 +21,6 @@ export default function usePrint() {
       setPrintCount(+count);
     }
   };
-
   const handlePrint = async (uri: string) => {
     const printCount = (await AsyncStorage.getItem(`printCount`)) || 0;
     const expiry = (await AsyncStorage.getItem(`expiry`)) || 0;
@@ -29,10 +31,7 @@ export default function usePrint() {
         });
         setPrintCount(1);
         AsyncStorage.setItem('printCount', `1`);
-        AsyncStorage.setItem(
-          'expiry',
-          `${new Date().setHours(new Date().getHours() + 1)}`
-        );
+        AsyncStorage.setItem('expiry', `${new Date().setHours(new Date().getHours() + 1)}`);
       } catch (e) {
         console.log(e);
       }
@@ -46,12 +45,14 @@ export default function usePrint() {
       } catch (e) {
         console.log(e);
       }
-    } else
-      Alert.alert(
-        'Oh No!',
-        'You are over the print limit for this time period'
-      );
+    } else Alert.alert('Oh No!', 'You are over the print limit for this time period');
   };
 
-  return { printCount, setPrintCount, getStoredPrintCount, handlePrint };
-}
+  return (
+    <PrintContext.Provider value={{ printCount, getStoredPrintCount, handlePrint }}>{children}</PrintContext.Provider>
+  );
+};
+
+export const usePrintContext = () => React.useContext(PrintContext);
+
+export default PrintProvider;

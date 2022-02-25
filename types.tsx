@@ -22,4 +22,5 @@ export type SelectableItemProps = {
   type?: string;
   uri?: string;
   searchTerm?: string;
+  onSelect?: () => void;
 }

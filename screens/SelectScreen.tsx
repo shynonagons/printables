@@ -5,14 +5,14 @@ import { Dimensions } from 'react-native';
 import SelectableItem from '../components/SelectableItem';
 import { Text, View } from '../components/Themed';
 import { SelectableItemProps } from '../types';
-import usePrint from '../hooks/usePrint';
+import { PRINT_RATE_LIMIT, usePrintContext } from '../context/PrintProvider';
 
 import defaultSelectOptions from '../data/characters';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SelectScreen() {
-  const [selectOptions, setSelectOptions] =
-    React.useState<SelectableItemProps[]>();
-  const { printCount, getStoredPrintCount } = usePrint();
+  const [selectOptions, setSelectOptions] = React.useState<SelectableItemProps[]>([]);
+  const { printCount, getStoredPrintCount } = usePrintContext();
   React.useEffect(() => {
     setSelectOptions(defaultSelectOptions);
     getStoredPrintCount();
@@ -22,7 +22,9 @@ export default function SelectScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>You have printed {printCount} pages so far</Text>
+      <Text>
+        You have printed {printCount} of {PRINT_RATE_LIMIT} pages so far
+      </Text>
       <FlatList
         data={selectOptions}
         numColumns={Math.floor(width / 180)}
