@@ -23,7 +23,7 @@ export default function SelectScreen() {
   return (
     <View style={styles.container}>
       <Text>
-        You have printed {printCount} of {PRINT_RATE_LIMIT} pages so far
+        {printCount} of {PRINT_RATE_LIMIT} printed
       </Text>
       <FlatList
         data={selectOptions}

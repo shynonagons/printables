@@ -3,17 +3,12 @@ import { StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SelectableItemProps } from '../types';
 
-export default function SelectableItem({
-  name,
-  uri = 'https://maxcdn.icons8.com/Share/icon/Cinema/avengers1600.png',
-  searchTerm,
-  onSelect,
-}: SelectableItemProps) {
+export default function SelectableItem({ name, uri, image, searchTerm, onSelect }: SelectableItemProps) {
   const navigation = useNavigation();
   const onSelectItem = () => (onSelect ? onSelect() : navigation.navigate('CharacterScreen', { name, searchTerm }));
   return (
     <TouchableOpacity style={styles.selectable} onPress={onSelectItem}>
-      <Image source={{ uri }} style={styles.image} />
+      <Image source={uri ? { uri } : image} style={styles.image} />
       <Text style={styles.name}>{name}</Text>
     </TouchableOpacity>
   );

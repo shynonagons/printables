@@ -5,9 +5,15 @@ import * as Print from 'expo-print';
 
 export const PRINT_RATE_LIMIT = 3;
 
+type PrintContextProps = {
+  handlePrint: (uri: string) => {};
+  printCount: number;
+  getStoredPrintCount: () => void;
+};
+
 const PrintContext = React.createContext({});
 
-const PrintProvider = (props): React.ReactElement => {
+const PrintProvider = (props: React.PropsWithChildren<PrintContextProps>): React.ReactElement => {
   const { children } = props;
 
   const [printCount, setPrintCount] = React.useState(0);
@@ -53,6 +59,6 @@ const PrintProvider = (props): React.ReactElement => {
   );
 };
 
-export const usePrintContext = () => React.useContext(PrintContext);
+export const usePrintContext = (): PrintContextProps => React.useContext(PrintContext) as PrintContextProps;
 
 export default PrintProvider;

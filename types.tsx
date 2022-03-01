@@ -5,7 +5,7 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   SelectScreen: undefined;
-  TabTwo: undefined;
+  CustomScreen: undefined;
 };
 
 export type SelectScreenParamList = {
@@ -23,4 +23,4 @@ export type SelectableItemProps = {
   uri?: string;
   searchTerm?: string;
   onSelect?: () => void;
-}
+};

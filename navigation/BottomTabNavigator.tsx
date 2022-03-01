@@ -7,7 +7,8 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import SelectScreen from '../screens/SelectScreen';
 import CharacterScreen from '../screens/CharacterScreen';
-import { BottomTabParamList, SelectScreenParamList, TabTwoParamList } from '../types';
+import { BottomTabParamList, SelectScreenParamList } from '../types';
+import CustomScreen from '../screens/CustomScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -15,14 +16,19 @@ export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator
-      initialRouteName="SelectScreen"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+    <BottomTab.Navigator initialRouteName="SelectScreen" tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
         name="SelectScreen"
         component={SelectNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-create" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="CustomScreen"
+        component={CustomScreen}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-book" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -42,16 +48,8 @@ const SelectStack = createStackNavigator<SelectScreenParamList>();
 function SelectNavigator() {
   return (
     <SelectStack.Navigator>
-      <SelectStack.Screen
-        name="SelectScreen"
-        component={SelectScreen}
-        options={{ headerTitle: 'Character' }}
-      />
-      <SelectStack.Screen
-        name="CharacterScreen"
-        component={CharacterScreen}
-        options={{ headerTitle: 'Image' }}
-      />
+      <SelectStack.Screen name="SelectScreen" component={SelectScreen} options={{ headerTitle: 'Character' }} />
+      <SelectStack.Screen name="CharacterScreen" component={CharacterScreen} options={{ headerTitle: 'Image' }} />
     </SelectStack.Navigator>
   );
 }
