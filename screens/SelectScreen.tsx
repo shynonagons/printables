@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, FlatList } from 'react-native';
-import { Dimensions } from 'react-native';
+import { StyleSheet, FlatList, useWindowDimensions } from 'react-native';
 
 import SelectableItem from '../components/SelectableItem';
 import { Text, View } from '../components/Themed';
@@ -8,17 +7,17 @@ import { SelectableItemProps } from '../types';
 import { PRINT_RATE_LIMIT, usePrintContext } from '../context/PrintProvider';
 
 import defaultSelectOptions from '../data/characters';
-import { useNavigation } from '@react-navigation/native';
 
 export default function SelectScreen() {
   const [selectOptions, setSelectOptions] = React.useState<SelectableItemProps[]>([]);
   const { printCount, getStoredPrintCount } = usePrintContext();
+
   React.useEffect(() => {
     setSelectOptions(defaultSelectOptions);
     getStoredPrintCount();
   }, []);
 
-  const width = Dimensions.get('window').width;
+  const { width } = useWindowDimensions();
 
   return (
     <View style={styles.container}>
