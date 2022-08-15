@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Text } from './Themed';
 import { useNavigation } from '@react-navigation/native';
 import { SelectableItemProps } from '../types';
 

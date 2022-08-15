@@ -7,6 +7,8 @@ import { SelectableItemProps } from '../types';
 import { PRINT_RATE_LIMIT, usePrintContext } from '../context/PrintProvider';
 
 import defaultSelectOptions from '../data/characters';
+import SearchInput from '../components/SearchInput';
+import RecentSearches from '../components/RecentSearches';
 
 export default function SelectScreen() {
   const [selectOptions, setSelectOptions] = React.useState<SelectableItemProps[]>([]);
@@ -24,6 +26,8 @@ export default function SelectScreen() {
       <Text>
         {printCount} of {PRINT_RATE_LIMIT} printed
       </Text>
+      <SearchInput />
+      <RecentSearches />
       <FlatList
         data={selectOptions}
         numColumns={Math.floor(width / 180)}
