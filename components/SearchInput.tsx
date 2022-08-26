@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     position: 'absolute',
-    left: 90,
+    left: '6%',
     top: 44,
     color: SEARCH_COLOR,
   },
   goIcon: {
     position: 'absolute',
-    right: 80,
+    right: '6%',
     top: 44,
   },
 });

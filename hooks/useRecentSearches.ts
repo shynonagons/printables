@@ -6,6 +6,7 @@ export default function useRecentSearches() {
   const add = async (searchString: string) => {
     const recents = await AsyncStorage.getItem('recentSearch');
     const parsedRecents = JSON.parse(recents || '[]');
+    if (parsedRecents.includes(searchString)) return; 
     const newRecents = [searchString, ...parsedRecents];
     if (newRecents.length >= MAX_RECENT_SEARCHES) newRecents.pop();
     const stringifiedRecents = JSON.stringify(newRecents);
@@ -14,7 +15,7 @@ export default function useRecentSearches() {
 
   const get = async () => {
     const recents = await AsyncStorage.getItem('recentSearch');
-    const parsedRecents = JSON.parse(recents || '[]');
+    const parsedRecents = [...new Set(JSON.parse(recents || '[]'))];
     return parsedRecents;
   };
 
