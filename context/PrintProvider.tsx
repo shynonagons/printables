@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Print from 'expo-print';
 
-export const PRINT_RATE_LIMIT = 3;
+export const PRINT_RATE_LIMIT = 6;
 
 type PrintContextProps = {
   handlePrint: (uri: string) => {};
