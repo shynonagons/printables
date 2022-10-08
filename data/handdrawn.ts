@@ -11,4 +11,7 @@ export default {
   lilpetey: 'https://coloringpages123.s3.us-east-2.amazonaws.com/coloring+pages/dogman/lilpetey.jpeg',
   peteybutterfly: 'https://coloringpages123.s3.us-east-2.amazonaws.com/coloring+pages/dogman/petey+butterfly.jpeg',
   petey: 'https://coloringpages123.s3.us-east-2.amazonaws.com/coloring+pages/dogman/petey.jpeg',
+  bigpigeon: 'https://coloringpages123.s3.us-east-2.amazonaws.com/coloring+pages/bigpigeon.jpeg',
+  mariobaddies: 'https://coloringpages123.s3.us-east-2.amazonaws.com/coloring+pages/mario_baddies.jpeg',
+  pigeonduckling: 'https://coloringpages123.s3.us-east-2.amazonaws.com/coloring+pages/pigeon_duckling.jpeg',
 };
