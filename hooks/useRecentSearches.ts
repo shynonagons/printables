@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SelectableItemProps } from '../types';
 
 const MAX_RECENT_SEARCHES = 20;
 
@@ -16,7 +17,7 @@ export default function useRecentSearches() {
   const get = async () => {
     const recents = await AsyncStorage.getItem('recentSearch');
     const parsedRecents = [...new Set(JSON.parse(recents || '[]'))];
-    return parsedRecents;
+    return parsedRecents as SelectableItemProps[];
   };
 
   const clear = async () => {

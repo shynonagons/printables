@@ -1,19 +1,34 @@
-import { EvilIcons } from '@expo/vector-icons';
+import { EvilIcons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Pressable, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import useRecentSearches from '../hooks/useRecentSearches';
 import { Text } from './Themed';
+import useFavorites from '../hooks/useFavorites';
 
-const RecentSearch = ({ name }) => {
+const RecentSearch = ({
+  name,
+  favorited,
+  favorite,
+  unfavorite,
+}: {
+  name: string;
+  favorited: boolean;
+  favorite: (name: string) => void;
+  unfavorite: (name: string) => void;
+}) => {
   const navigation = useNavigation();
   const handlePressSearchRow = () => {
-    navigation.navigate('CharacterScreen', { name });
+    navigation.navigate('SearchResultsScreen', { name });
   };
+  const handleFavorite = () => (favorited ? unfavorite(name) : favorite(name));
   return (
     <Pressable onPress={handlePressSearchRow} style={styles.recentRow}>
       <Text style={styles.resultText}>{name}</Text>
+      <Pressable onPress={handleFavorite}>
+        {favorited ? <FontAwesome name="heart" size={36} color="blue" /> : <EvilIcons name="heart" size={48} />}
+      </Pressable>
       <EvilIcons name="arrow-right" size={48} />
     </Pressable>
   );
@@ -23,6 +38,7 @@ export default function RecentSearches() {
   const [recents, setRecents] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
   const recentSearches = useRecentSearches();
+  const { favorites, favorite, unfavorite } = useFavorites();
   const animHeight = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -60,7 +76,17 @@ export default function RecentSearches() {
       </Pressable>
 
       <Animated.View style={[{ height: animHeight }]}>
-        <FlatList data={recents} renderItem={({ item }) => <RecentSearch name={item} />} />
+        <FlatList
+          data={recents}
+          renderItem={({ item }) => (
+            <RecentSearch
+              name={item}
+              favorited={favorites.map(({ name }) => name).includes(item)}
+              favorite={favorite}
+              unfavorite={unfavorite}
+            />
+          )}
+        />
       </Animated.View>
     </Animated.View>
   ) : null;

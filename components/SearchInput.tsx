@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, TextInput } from 'react-native';
 import useRecentSearches from '../hooks/useRecentSearches';
+import { View } from './Themed';
 
 const SEARCH_COLOR = '#437af9';
 
@@ -14,19 +15,24 @@ export default function SearchInput() {
   const doSearch = async () => {
     if (!searchTerm) return;
     await recentSearches.add(searchTerm);
-    navigation.navigate('CharacterScreen', { searchTerm });
+    navigation.navigate('SearchResultsScreen', { searchTerm });
   };
 
   return (
-    <>
-      <TextInput style={styles.searchInput} placeholder="Search" onChangeText={handleChangeText} />
+    <View style={{ position: 'relative' }}>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search"
+        onChangeText={handleChangeText}
+        onSubmitEditing={doSearch}
+      />
       <EvilIcons size={64} name="search" style={styles.searchIcon} />
       {searchTerm.length > 0 && (
         <Pressable onPress={doSearch} style={styles.goIcon}>
           <EvilIcons size={64} name="arrow-right" style={{ color: SEARCH_COLOR }} />
         </Pressable>
       )}
-    </>
+    </View>
   );
 }
 
@@ -45,13 +51,13 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     position: 'absolute',
-    left: '6%',
-    top: 44,
+    left: 20,
+    top: 26,
     color: SEARCH_COLOR,
   },
   goIcon: {
     position: 'absolute',
-    right: '6%',
-    top: 44,
+    right: 20,
+    top: 26,
   },
 });

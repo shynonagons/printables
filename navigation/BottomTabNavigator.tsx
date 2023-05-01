@@ -6,7 +6,7 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import SelectScreen from '../screens/SelectScreen';
-import CharacterScreen from '../screens/CharacterScreen';
+import SearchResultsScreen from '../screens/SearchResultsScreen';
 import { BottomTabParamList, SelectScreenParamList } from '../types';
 import CustomScreen from '../screens/CustomScreen';
 
@@ -16,11 +16,12 @@ export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator initialRouteName="SelectScreen" tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+    <BottomTab.Navigator initialRouteName="SelectScreen">
       <BottomTab.Screen
-        name="SelectScreen"
+        name="SelectNavigator"
         component={SelectNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-create" color={color} />,
         }}
       />
@@ -35,21 +36,17 @@ export default function BottomTabNavigator() {
   );
 }
 
-// You can explore the built-in icon families and icons on the web at:
-// https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const SelectStack = createStackNavigator<SelectScreenParamList>();
 
 function SelectNavigator() {
   return (
     <SelectStack.Navigator>
-      <SelectStack.Screen name="SelectScreen" component={SelectScreen} options={{ headerTitle: 'Character' }} />
-      <SelectStack.Screen name="CharacterScreen" component={CharacterScreen} options={{ headerTitle: 'Image' }} />
+      <SelectStack.Screen name="SelectScreen" component={SelectScreen} options={{ headerShown: false }} />
+      <SelectStack.Screen name="SearchResultsScreen" component={SearchResultsScreen} options={{ headerShown: false }} />
     </SelectStack.Navigator>
   );
 }

@@ -6,7 +6,7 @@ import { SelectableItemProps } from '../types';
 
 export default function SelectableItem({ name, uri, image, searchTerm, onSelect }: SelectableItemProps) {
   const navigation = useNavigation();
-  const onSelectItem = () => (onSelect ? onSelect() : navigation.navigate('CharacterScreen', { name, searchTerm }));
+  const onSelectItem = () => (onSelect ? onSelect() : navigation.navigate('SearchResultsScreen', { name, searchTerm }));
   return (
     <TouchableOpacity style={styles.selectable} onPress={onSelectItem}>
       <Image source={uri ? { uri } : image} style={styles.image} />

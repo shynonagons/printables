@@ -4,13 +4,13 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  SelectScreen: undefined;
+  SelectNavigator: undefined;
   CustomScreen: undefined;
 };
 
 export type SelectScreenParamList = {
   SelectScreen: undefined;
-  CharacterScreen: SelectableItemProps;
+  SearchResultsScreen: SelectableItemProps;
 };
 
 export type TabTwoParamList = {
