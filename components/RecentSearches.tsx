@@ -6,17 +6,20 @@ import { FlatList } from 'react-native-gesture-handler';
 import useRecentSearches from '../hooks/useRecentSearches';
 import { Text } from './Themed';
 import useFavorites from '../hooks/useFavorites';
+import { colors } from '../constants/Colors';
 
 const RecentSearch = ({
   name,
   favorited,
   favorite,
   unfavorite,
+  remove,
 }: {
   name: string;
   favorited: boolean;
   favorite: (name: string) => void;
   unfavorite: (name: string) => void;
+  remove: (name: string) => void;
 }) => {
   const navigation = useNavigation();
   const handlePressSearchRow = () => {
@@ -27,9 +30,12 @@ const RecentSearch = ({
     <Pressable onPress={handlePressSearchRow} style={styles.recentRow}>
       <Text style={styles.resultText}>{name}</Text>
       <Pressable onPress={handleFavorite}>
-        {favorited ? <FontAwesome name="heart" size={36} color="blue" /> : <EvilIcons name="heart" size={48} />}
+        {favorited ? <FontAwesome name="heart" size={36} color={colors.red} /> : <EvilIcons name="heart" size={48} />}
       </Pressable>
       <EvilIcons name="arrow-right" size={48} />
+      <Pressable onPress={() => remove(name)}>
+        {<FontAwesome name="times-circle" size={36} color={colors.red} />}
+      </Pressable>
     </Pressable>
   );
 };
@@ -84,6 +90,7 @@ export default function RecentSearches() {
               favorited={favorites.map(({ name }) => name).includes(item)}
               favorite={favorite}
               unfavorite={unfavorite}
+              remove={recentSearches.remove}
             />
           )}
         />

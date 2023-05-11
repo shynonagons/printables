@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Print from 'expo-print';
+import useHistory from '../hooks/useHistory';
 
 export const PRINT_RATE_LIMIT = 3;
 
@@ -15,11 +16,12 @@ const PrintContext = React.createContext({});
 
 const PrintProvider = (props: React.PropsWithChildren<PrintContextProps>): React.ReactElement => {
   const { children } = props;
-
   const [printCount, setPrintCount] = React.useState(0);
+  const { addHistoryItem } = useHistory();
+
   const getStoredPrintCount = async () => {
     const expiry = (await AsyncStorage.getItem(`expiry`)) || 0;
-    if (new Date().valueOf() > expiry) {
+    if (new Date().valueOf() > Number(expiry)) {
       AsyncStorage.setItem('printCount', `0`);
       setPrintCount(0);
     } else {
@@ -28,6 +30,7 @@ const PrintProvider = (props: React.PropsWithChildren<PrintContextProps>): React
     }
   };
   const handlePrint = async (uri: string) => {
+    addHistoryItem(uri);
     const printCount = (await AsyncStorage.getItem(`printCount`)) || 0;
     const expiry = (await AsyncStorage.getItem(`expiry`)) || 0;
     if (new Date().valueOf() > +expiry) {
@@ -38,6 +41,7 @@ const PrintProvider = (props: React.PropsWithChildren<PrintContextProps>): React
         setPrintCount(1);
         AsyncStorage.setItem('printCount', `1`);
         AsyncStorage.setItem('expiry', `${new Date().setHours(new Date().getHours() + 1)}`);
+        addHistoryItem(uri);
       } catch (e) {
         console.log(e);
       }
@@ -48,6 +52,7 @@ const PrintProvider = (props: React.PropsWithChildren<PrintContextProps>): React
         });
         setPrintCount(+printCount + 1);
         AsyncStorage.setItem('printCount', `${+printCount + 1}`);
+        addHistoryItem(uri);
       } catch (e) {
         console.log(e);
       }

@@ -10,11 +10,15 @@ import SearchInput from '../components/SearchInput';
 import RecentSearches from '../components/RecentSearches';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useFavorites from '../hooks/useFavorites';
+import useHistory from '../hooks/useHistory';
+import HistoryItem from '../components/HistoryItem';
+import tw from '../lib/tailwind';
 
 export default function SelectScreen() {
   const [selectOptions, setSelectOptions] = React.useState<SelectableItemProps[]>([]);
   const { printCount, getStoredPrintCount } = usePrintContext();
   const { favorites } = useFavorites();
+  const { history } = useHistory();
 
   React.useEffect(() => {
     getStoredPrintCount();
@@ -22,45 +26,28 @@ export default function SelectScreen() {
 
   const { width } = useWindowDimensions();
 
-  console.log('should rerender my faves now', favorites);
-
   return (
-    <SafeAreaView style={styles.contentContainer}>
-      <View style={styles.container}>
-        <Text style={styles.printCount}>
-          {printCount} of {PRINT_RATE_LIMIT} printed
-        </Text>
+    <SafeAreaView style={tw`flex-1`}>
+      <Text style={tw`text-lg text-center pt-3`}>
+        {printCount} of {PRINT_RATE_LIMIT} printed
+      </Text>
+      <View style={tw`items-center justify-center mt-20`}>
         <SearchInput />
-        <RecentSearches />
-        <FlatList
+        {/* <RecentSearches /> */}
+        {/* <FlatList
+        key={`favorites-${width}`}
           data={favorites}
           numColumns={Math.floor(width / 180)}
           renderItem={({ item }) => <SelectableItem {...item} />}
-        />
+        /> */}
       </View>
+      <FlatList
+        key={`history-${width}`}
+        data={history}
+        numColumns={Math.floor(width / 180)}
+        renderItem={({ item }) => <HistoryItem uri={item} />}
+        contentContainerStyle={tw`flex-1 items-center mt-20`}
+      />
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  printCount: {
-    fontSize: 18,
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

@@ -8,6 +8,7 @@ import { usePrintContext } from '../context/PrintProvider';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View } from '../components/Themed';
 import LoadingOverlay from '../components/LoadingOverlay';
+import { colors } from '../constants/Colors';
 
 const filters = [
   {
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
   filterIcon: {
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: 'blue',
+    borderColor: colors.blue,
     backgroundColor: 'white',
     padding: 8,
     margin: 10,

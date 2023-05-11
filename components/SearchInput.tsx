@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, TextInput } from 'react-native';
 import useRecentSearches from '../hooks/useRecentSearches';
 import { View } from './Themed';
+import tw from '../lib/tailwind';
 
 const SEARCH_COLOR = '#437af9';
 
@@ -19,7 +20,7 @@ export default function SearchInput() {
   };
 
   return (
-    <View style={{ position: 'relative' }}>
+    <View style={tw`relative`}>
       <TextInput
         style={styles.searchInput}
         placeholder="Search"

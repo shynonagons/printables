@@ -16,7 +16,7 @@ export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator initialRouteName="SelectScreen">
+    <BottomTab.Navigator initialRouteName="SelectNavigator">
       <BottomTab.Screen
         name="SelectNavigator"
         component={SelectNavigator}
@@ -25,13 +25,13 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-create" color={color} />,
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="CustomScreen"
         component={CustomScreen}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-book" color={color} />,
         }}
-      />
+      /> */}
     </BottomTab.Navigator>
   );
 }
