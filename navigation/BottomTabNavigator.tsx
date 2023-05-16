@@ -46,7 +46,7 @@ function SelectNavigator() {
   return (
     <SelectStack.Navigator>
       <SelectStack.Screen name="SelectScreen" component={SelectScreen} options={{ headerShown: false }} />
-      <SelectStack.Screen name="SearchResultsScreen" component={SearchResultsScreen} options={{ headerShown: false }} />
+      <SelectStack.Screen name="SearchResults" component={SearchResultsScreen} options={{ headerShown: false }} />
     </SelectStack.Navigator>
   );
 }

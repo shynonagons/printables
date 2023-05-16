@@ -12,9 +12,9 @@ export default function useHistory() {
         })()
     }, [])
     const addHistoryItem = (item: any) => {
-        const newHistory = [...new Set([...history, item])]
         // Check max history items
-        if (newHistory.length > MAX_HISTORY_LENGTH) newHistory.shift()
+        const historyOrShifted = history.length > MAX_HISTORY_LENGTH ? history.slice(0,-1) : history;
+        const newHistory = [...new Set([item, ...historyOrShifted])]
         setHistory(newHistory)
         AsyncStorage.setItem('history', JSON.stringify(newHistory))
     }

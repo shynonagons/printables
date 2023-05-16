@@ -12,7 +12,7 @@ export default function HistoryItem({ uri }: { uri: string }) {
 
   return (
     <Pressable onPress={handlePress}>
-      <View style={tw`p-1 m-2 rounded-xl border border-4 border-blue bg-white`}>
+      <View style={tw`p-1 m-2 rounded-xl border border-4 border-green bg-white`}>
         <Image source={{ uri }} style={tw`w-[140px] h-[200px]`} />
       </View>
     </Pressable>

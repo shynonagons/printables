@@ -1,5 +1,6 @@
 export type RootStackParamList = {
   Root: undefined;
+  SearchResults: SelectableItemProps;
   NotFound: undefined;
 };
 
@@ -10,7 +11,7 @@ export type BottomTabParamList = {
 
 export type SelectScreenParamList = {
   SelectScreen: undefined;
-  SearchResultsScreen: SelectableItemProps;
+  SearchResults: SelectableItemProps;
 };
 
 export type TabTwoParamList = {

@@ -30,7 +30,6 @@ const PrintProvider = (props: React.PropsWithChildren<PrintContextProps>): React
     }
   };
   const handlePrint = async (uri: string) => {
-    addHistoryItem(uri);
     const printCount = (await AsyncStorage.getItem(`printCount`)) || 0;
     const expiry = (await AsyncStorage.getItem(`expiry`)) || 0;
     if (new Date().valueOf() > +expiry) {

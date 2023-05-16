@@ -1,14 +1,15 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity, Image, Pressable, ActivityIndicator } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, Pressable, ActivityIndicator } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { Feather, Ionicons } from '@expo/vector-icons';
-import { SelectScreenParamList } from '../types';
+import { RootStackParamList } from '../types';
 import { usePrintContext } from '../context/PrintProvider';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View } from '../components/Themed';
+import { Text, View } from '../components/Themed';
 import LoadingOverlay from '../components/LoadingOverlay';
 import { colors } from '../constants/Colors';
+import tw from '../lib/tailwind';
 
 const filters = [
   {
@@ -24,7 +25,7 @@ const filters = [
 export default function SearchResultscreen({
   route: { params },
   navigation,
-}: StackScreenProps<SelectScreenParamList, 'SearchResultsScreen'>) {
+}: StackScreenProps<RootStackParamList, 'SearchResults'>) {
   const [currentUri, setCurrentUri] = React.useState('');
   const [currentFilter, setCurrentFilter] = React.useState(filters[0].name);
 
@@ -52,6 +53,7 @@ export default function SearchResultscreen({
         <View style={{ flexDirection: 'row' }}>
           {filters.map((filter) => (
             <TouchableOpacity
+              key={filter.key}
               style={[styles.filterIcon, currentFilter === filter.name ? styles.selectedFilterIcon : null]}
               onPress={() => setCurrentFilter(filter.name)}
             >
@@ -59,7 +61,7 @@ export default function SearchResultscreen({
             </TouchableOpacity>
           ))}
         </View>
-        <Text style={styles.searchText}>
+        <Text style={tw`text-3xl ml-8`}>
           {displayName} {currentFilter}
         </Text>
       </View>
@@ -120,10 +122,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  searchText: {
-    fontSize: 28,
-    marginLeft: 20,
   },
   link: {
     marginTop: 15,
