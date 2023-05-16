@@ -3,7 +3,6 @@ import { FlatList, Image, Pressable, SafeAreaView, StyleSheet, useWindowDimensio
 
 import { Text, View } from '../components/Themed';
 import { PRINT_RATE_LIMIT, usePrintContext } from '../context/PrintProvider';
-import handdrawn from '../data/handdrawn';
 
 export default function CustomScreen() {
   const { width } = useWindowDimensions();
@@ -14,13 +13,13 @@ export default function CustomScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Custom Prints</Text>
-      <Text>
+      <Text style={styles.subtitle}>
         {printCount} of {PRINT_RATE_LIMIT} printed
       </Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <FlatList
         numColumns={Math.floor(width / 180)}
-        data={Object.values(handdrawn)}
+        data={[]}
         keyExtractor={(item, index) => `${index}`}
         renderItem={({ item }) => (
           <Pressable onPress={() => handleOnPress(item)}>
@@ -42,6 +41,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  subtitle: {
+    fontSize: 18,
   },
   separator: {
     marginVertical: 30,

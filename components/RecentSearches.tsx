@@ -1,20 +1,44 @@
-import { EvilIcons } from '@expo/vector-icons';
+import { EvilIcons, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useRef, useState } from 'react';
-import { Animated, Pressable, StyleSheet } from 'react-native';
+import { Animated, Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import useRecentSearches from '../hooks/useRecentSearches';
-import { Text } from './Themed';
+import { Text, View } from './Themed';
+import useFavorites from '../hooks/useFavorites';
+import { colors } from '../constants/Colors';
+import tw from '../lib/tailwind';
 
-const RecentSearch = ({ name }) => {
+const RecentSearch = ({
+  name,
+  favorited,
+  favorite,
+  unfavorite,
+  remove,
+}: {
+  name: string;
+  favorited: boolean;
+  favorite: (name: string) => void;
+  unfavorite: (name: string) => void;
+  remove: (name: string) => void;
+}) => {
   const navigation = useNavigation();
   const handlePressSearchRow = () => {
-    navigation.navigate('CharacterScreen', { name });
+    navigation.navigate('SearchResults', { name });
   };
+  const handleFavorite = () => (favorited ? unfavorite(name) : favorite(name));
   return (
-    <Pressable onPress={handlePressSearchRow} style={styles.recentRow}>
-      <Text style={styles.resultText}>{name}</Text>
-      <EvilIcons name="arrow-right" size={48} />
+    <Pressable onPress={handlePressSearchRow} style={tw`items-center p-2`}>
+      <Text style={tw`text-xl mr-2`}>{name}</Text>
+      <View style={tw`flex-row items-center`}>
+        <Pressable onPress={handleFavorite}>
+          {favorited ? <FontAwesome name="heart" size={36} color={colors.red} /> : <EvilIcons name="heart" size={48} />}
+        </Pressable>
+        <EvilIcons name="arrow-right" size={48} />
+        {/* <Pressable onPress={() => remove(name)}>
+          {<FontAwesome name="times-circle" size={36} color={colors.red} />}
+        </Pressable> */}
+      </View>
     </Pressable>
   );
 };
@@ -23,6 +47,7 @@ export default function RecentSearches() {
   const [recents, setRecents] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
   const recentSearches = useRecentSearches();
+  const { favorites, favorite, unfavorite } = useFavorites();
   const animHeight = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -50,36 +75,26 @@ export default function RecentSearches() {
 
   const iconName = isOpen ? 'chevron-up' : 'chevron-down';
   return recents.length > 0 ? (
-    <Animated.View style={styles.recentSearchContainer}>
-      <Pressable
-        style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'transparent' }}
-        onPress={handleToggleContainer}
-      >
-        <Text style={styles.headerText}>Recent Searches</Text>
+    <Animated.View style={tw`w-90% mt-10 p-30 pt-10 border-4 border-yellow rounded-xl`}>
+      <Pressable style={tw`flex-row bg-transparent`} onPress={handleToggleContainer}>
+        <Text style={tw`text-2xl`}>Recent Searches</Text>
         <EvilIcons name={iconName} size={64} />
       </Pressable>
 
       <Animated.View style={[{ height: animHeight }]}>
-        <FlatList data={recents} renderItem={({ item }) => <RecentSearch name={item} />} />
+        <FlatList
+          data={recents}
+          renderItem={({ item }) => (
+            <RecentSearch
+              name={item}
+              favorited={favorites.map(({ name }) => name).includes(item)}
+              favorite={favorite}
+              unfavorite={unfavorite}
+              remove={recentSearches.remove}
+            />
+          )}
+        />
       </Animated.View>
     </Animated.View>
   ) : null;
 }
-
-const styles = StyleSheet.create({
-  recentSearchContainer: {
-    width: '90%',
-    marginVertical: 10,
-    padding: 30,
-    paddingTop: 10,
-    borderWidth: 1,
-    borderRadius: 30,
-  },
-  headerText: { fontSize: 32, fontWeight: 'bold' },
-  resultText: { fontSize: 28, marginRight: 10 },
-  recentRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-  },
-});
