@@ -2,12 +2,19 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
 import * as FileSystem from 'expo-file-system';
+import { create } from 'zustand'
 
 const MAX_IMAGES = 40;
 
+const useSavedImageStore = create<{savedImages: string[]; setSavedImages: (savedImages: string[]) => void}>((set) => ({
+  savedImages: [],
+  setSavedImages: (savedImages: string[]) => set((state) => ({ savedImages })),
+}))
+
 export default function useSavedImages() {
-  const [savedImages, setSavedImages] = useState<string[]>([]);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
+  const savedImages = useSavedImageStore((state) => state.savedImages)
+  const setSavedImages = useSavedImageStore((state) => state.setSavedImages)
   useEffect(() => {
     (async () => {
       // const fromFs = await FileSystem.readDirectoryAsync(FileSystem.documentDirectory || '')
@@ -26,7 +33,7 @@ export default function useSavedImages() {
     if (savedImages.length >= MAX_IMAGES) return Toast.show({ type: 'warning', text1: 'Too many saved photos!' });
     const filepathArr = fileUri.split('/');
     const filename = filepathArr[filepathArr.length - 1];
-    setSavedImages((prev) => [fileUri, ...prev]);
+    setSavedImages([fileUri, ...savedImages]);
     return AsyncStorage.setItem(`savedImage:${filename}`, fileUri);
 
     const callback = (dp: any) => {

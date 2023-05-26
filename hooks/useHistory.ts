@@ -1,10 +1,17 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
+import { create } from 'zustand'
 
 const MAX_HISTORY_LENGTH = 20;
 
+const useHistoryStore = create<{history: string[]; setHistory: (history: string[]) => void}>((set) => ({
+    history: [],
+    setHistory: (history: string[]) => set((state) => ({ history })),
+}))
+
 export default function useHistory() {
-  const [history, setHistory] = useState<string[]>([]);
+    const history = useHistoryStore((state) => state.history)
+    const setHistory = useHistoryStore((state) => state.setHistory)
   useEffect(() => {
     (async () => {
       const storedHistory = await AsyncStorage.getItem('history');
