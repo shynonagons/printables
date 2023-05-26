@@ -6,8 +6,8 @@ export const colors = {
   blue: '#1B9AAA',
   green: '#06D6A0',
   yellow: '#FFC43D',
-  orange: '#F5CDA7'
-}
+  orange: '#F5CDA7',
+};
 
 export default {
   light: {

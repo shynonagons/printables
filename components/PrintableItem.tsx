@@ -4,7 +4,7 @@ import tw from '../lib/tailwind';
 import { Image, Pressable } from 'react-native';
 import { usePrintContext } from '../context/PrintProvider';
 
-export default function HistoryItem({ uri }: { uri: string }) {
+export default function PrintableItem({ uri }: { uri: string }) {
   const { handlePrint } = usePrintContext();
   const handlePress = () => {
     handlePrint(uri);

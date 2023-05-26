@@ -7,11 +7,13 @@ import SearchInput from '../components/SearchInput';
 import RecentSearches from '../components/RecentSearches';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useHistory from '../hooks/useHistory';
-import HistoryItem from '../components/HistoryItem';
+import PrintableItem from '../components/PrintableItem';
 import tw from '../lib/tailwind';
 import SelectableItem from '../components/SelectableItem';
 import characters from '../data/characters';
 import { ScrollView } from 'react-native-gesture-handler';
+import ImagePicker from '../components/ImagePicker';
+import SavedImages from '../components/SavedImages';
 
 export default function SelectScreen() {
   const { printCount, getStoredPrintCount } = usePrintContext();
@@ -30,6 +32,7 @@ export default function SelectScreen() {
           {printCount} of {PRINT_RATE_LIMIT} printed
         </Text>
         <View style={tw`items-center justify-center mt-20`}>
+          <ImagePicker />
           <SearchInput />
           {/* <RecentSearches /> */}
           {/* <FlatList
@@ -39,6 +42,7 @@ export default function SelectScreen() {
           renderItem={({ item }) => <SelectableItem {...item} />}
         /> */}
         </View>
+        <SavedImages />
         {history.length > 0 && (
           <View style={tw`mt-20`}>
             <Text style={tw`text-2xl`}>Print It Again</Text>
@@ -46,7 +50,7 @@ export default function SelectScreen() {
               key={`history-${width}`}
               horizontal
               data={history}
-              renderItem={({ item }) => <HistoryItem uri={item} />}
+              renderItem={({ item }) => <PrintableItem uri={item} />}
               contentContainerStyle={tw`flex-1 items-center`}
             />
           </View>
