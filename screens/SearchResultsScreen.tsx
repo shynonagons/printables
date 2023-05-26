@@ -10,6 +10,7 @@ import { Text, View } from '../components/Themed';
 import LoadingOverlay from '../components/LoadingOverlay';
 import { colors } from '../constants/Colors';
 import tw from '../lib/tailwind';
+import { FlatList } from 'react-native-gesture-handler';
 
 const filters = [
   {
@@ -51,15 +52,19 @@ export default function SearchResultscreen({
           <Feather name="chevron-left" size={48} color="white" />
         </Pressable>
         <View style={{ flexDirection: 'row' }}>
-          {filters.map((filter) => (
-            <TouchableOpacity
-              key={filter.key}
-              style={[styles.filterIcon, currentFilter === filter.name ? styles.selectedFilterIcon : null]}
-              onPress={() => setCurrentFilter(filter.name)}
-            >
-              <Image source={{ uri: filter.uri }} style={styles.filter} />
-            </TouchableOpacity>
-          ))}
+          <FlatList
+            horizontal
+            data={filters}
+            renderItem={({ item: filter }) => (
+              <TouchableOpacity
+                key={filter.key}
+                style={[styles.filterIcon, currentFilter === filter.name ? styles.selectedFilterIcon : null]}
+                onPress={() => setCurrentFilter(filter.name)}
+              >
+                <Image source={{ uri: filter.uri }} style={styles.filter} />
+              </TouchableOpacity>
+            )}
+          />
         </View>
         <Text style={tw`text-3xl ml-8`}>
           {displayName} {currentFilter}
