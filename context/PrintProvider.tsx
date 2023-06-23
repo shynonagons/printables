@@ -44,7 +44,7 @@ const PrintProvider = (props: React.PropsWithChildren<PrintContextProps>): React
       } catch (e) {
         console.log(e);
       }
-    } else if (+printCount < PRINT_RATE_LIMIT) {
+    } else if (true) {
       try {
         await Print.printAsync({
           uri,
