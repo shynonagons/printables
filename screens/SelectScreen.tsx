@@ -26,45 +26,48 @@ export default function SelectScreen() {
   const { width } = useWindowDimensions();
 
   return (
-    <SafeAreaView style={tw`flex-1 bg-white dark:bg-black`}>
-      <ScrollView style={tw`flex-1`} contentContainerStyle={tw`mx-5`}>
-        <Text style={tw`text-lg text-center pt-3`}>
-          {printCount} of {PRINT_RATE_LIMIT} printed
-        </Text>
-        <View style={tw`items-center justify-center mt-20`}>
-          <ImagePicker />
-          <SearchInput />
-          {/* <RecentSearches /> */}
-          {/* <FlatList
-        key={`favorites-${width}`}
-          data={favorites}
-          numColumns={Math.floor(width / 180)}
-          renderItem={({ item }) => <SelectableItem {...item} />}
-        /> */}
-        </View>
-        <SavedImages />
-        {history.length > 0 && (
-          <View style={tw`mt-20`}>
-            <Text style={tw`text-2xl`}>Print It Again</Text>
-            <FlatList
-              key={`history-${width}`}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={history}
-              renderItem={({ item }) => <PrintableItem uri={item} />}
-            />
-          </View>
-        )}
-        <View style={tw`mt-20`}>
-          <Text style={tw`text-2xl`}>Characters</Text>
-          <FlatList
-            key={`characters-${width}`}
-            data={characters}
-            numColumns={Math.floor(width / 160)}
-            renderItem={({ item }) => <SelectableItem {...item} key={item.key} />}
-          />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={tw`flex-1 bg-white dark:bg-black px-5`}>
+      <View style={tw`mt-5`}>
+        <FlatList
+          ListHeaderComponent={() => (
+            <>
+              <Text style={tw`text-2xl`}>Printables</Text>
+              {/* <Text style={tw`text-lg text-center pt-3`}>
+                {printCount} of {PRINT_RATE_LIMIT} printed
+              </Text> */}
+              <View style={tw`items-center justify-center mt-5`}>
+                <ImagePicker />
+                <SearchInput />
+                {/* <RecentSearches /> */}
+                {/* <FlatList
+          key={`favorites-${width}`}
+            data={favorites}
+            numColumns={Math.floor(width / 180)}
+            renderItem={({ item }) => <SelectableItem {...item} />}
+          /> */}
+              </View>
+              <SavedImages />
+              {history.length > 0 && (
+                <View style={tw`mt-20`}>
+                  <Text style={tw`text-xl`}>Print It Again</Text>
+                  <FlatList
+                    key={`history-${width}`}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    data={history}
+                    renderItem={({ item }) => <PrintableItem uri={item} />}
+                  />
+                </View>
+              )}
+              <Text style={tw`text-xl`}>Characters</Text>
+            </>
+          )}
+          key={`characters-${width}`}
+          data={characters}
+          numColumns={Math.floor(width / 160)}
+          renderItem={({ item }) => <SelectableItem {...item} key={item.key} />}
+        />
+      </View>
     </SafeAreaView>
   );
 }

@@ -18,7 +18,10 @@ const filters = [
     uri: 'https://icons.iconarchive.com/icons/google/noto-emoji-objects/1024/62913-crayon-icon.png',
   },
   { name: 'lego coloring pages', uri: 'https://webstockreview.net/images/lego-clipart-head-lego-12.png' },
-  { name: 'color by number', uri: 'https://cdn3s.iosnoops.com/wp-content/uploads/appsicons/1317978215x356.jpg' },
+  {
+    name: 'color by number',
+    uri: 'https://eslvault.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGZXNsdmF1bHQuY29tJTJGd3AtY29udGVudCUyRnVwbG9hZHMlMkYyMDIxJTJGMTIlMkZkb2ctUERGLWNvbG9yLWJ5LW51bWJlci1wcmludGFibGUuanBnJmNhY2hlTWFya2VyPTE3MjM1ODAxNDAtNDYwMDEmdG9rZW49ZjNiZDk5YjVmYjg4NWZiMA.q.jpg',
+  },
   { name: 'connect the dots', uri: 'https://cdn.onlinewebfonts.com/svg/img_463121.png' },
   { name: 'activity', uri: 'https://cdn.onlinewebfonts.com/svg/img_167377.png' },
 ].map((i, index) => ({ ...i, key: index }));
@@ -41,7 +44,7 @@ export default function SearchResultscreen({
   const displayName = params.name ?? params.searchTerm;
   const filterText = `${currentFilter.replace(/\s/g, '+')}+printable`;
   const nameText = params.searchTerm ? params.searchTerm.replace(/\s/g, '+') : params.name.replace(/\s/g, '+');
-  const searchURL = `https://safe.duckduckgo.com/?q=${filterText}${nameText}&atb=v262-1&iax=images&ia=images`;
+  const searchURL = `https://safe.duckduckgo.com/?q=${filterText}+${nameText}&atb=v262-1&iax=images&ia=images`;
 
   const disabled = !currentUri;
 
@@ -106,13 +109,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    marginTop: -140,
+    marginTop: -170,
   },
   menuContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 25,
-    paddingLeft: 50,
+    paddingVertical: 12,
+    paddingLeft: 10,
   },
   backButton: {
     padding: 2,
