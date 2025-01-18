@@ -51,10 +51,10 @@ export default function SearchResultscreen({
   return (
     <SafeAreaView style={styles.contentContainer}>
       <View style={styles.menuContainer}>
-        <Pressable onPress={navigation.goBack} style={styles.backButton}>
-          <Feather name="chevron-left" size={48} color="white" />
-        </Pressable>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={tw`flex flex-row items-center`}>
+          <Pressable onPress={navigation.goBack} style={styles.backButton}>
+            <Feather name="chevron-left" size={48} color="white" />
+          </Pressable>
           <FlatList
             horizontal
             data={filters}
@@ -108,11 +108,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-
     marginTop: -170,
   },
   menuContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 12,
     paddingLeft: 10,
