@@ -49,9 +49,9 @@ export default function SelectScreen() {
             <FlatList
               key={`history-${width}`}
               horizontal
+              showsHorizontalScrollIndicator={false}
               data={history}
               renderItem={({ item }) => <PrintableItem uri={item} />}
-              contentContainerStyle={tw`flex-1 items-center`}
             />
           </View>
         )}
@@ -61,7 +61,7 @@ export default function SelectScreen() {
             key={`characters-${width}`}
             data={characters}
             numColumns={Math.floor(width / 160)}
-            renderItem={({ item }) => <SelectableItem {...item} />}
+            renderItem={({ item }) => <SelectableItem {...item} key={item.key} />}
           />
         </View>
       </ScrollView>

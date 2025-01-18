@@ -1,4 +1,3 @@
-import { Text } from './Themed';
 import { View } from './Themed';
 import tw from '../lib/tailwind';
 import { Image, Pressable } from 'react-native';
