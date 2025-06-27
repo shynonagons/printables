@@ -15,6 +15,7 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/cdb4e443-78eb-4eb7-804e-e8d78e0628b2"
     },
+    "newArchEnabled": true,
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -40,7 +41,8 @@
     },
     "plugins": [
       "expo-font",
-      "expo-asset"
+      "expo-asset",
+      "expo-web-browser"
     ]
   }
 }
